@@ -1,0 +1,1 @@
+17:22:57.215 ERROR c.p.techbootcampcalvintodd.Product - Item Price is negative

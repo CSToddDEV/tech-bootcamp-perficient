@@ -1,0 +1,21 @@
+<configuration>
+    <timestamp key="byDay" datePattern="yyyyMMdd'T'HHmmss"/>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <file> log-${byDay}.txt </file>
+        <append>true</append>
+        <immediateFlush>true</immediateFlush>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="debug">
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>
