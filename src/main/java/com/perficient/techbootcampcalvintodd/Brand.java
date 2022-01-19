@@ -32,8 +32,8 @@ public class Brand {
         this.url = url;
     }
 
-    public void addProduct(String name, double price) {
-        Product new_product = new Product(name, price);
+    public void addProduct(long id, String name, double price, String brand, String type) {
+        Product new_product = new Product(id, name, price, brand, type);
         this.products.put(new_product.getName(), new_product);
     }
 

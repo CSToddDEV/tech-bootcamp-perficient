@@ -27,14 +27,14 @@ class TechBootcampPerficientApplicationTests {
     @Test
     @DisplayName("This Method Tests that a Product Creates With The Correct Name")
     public void testNewProductName() {
-        Product new_product = new Product("Beard Oil", 12.99);
+        Product new_product = new Product(2, "Classic", 12.99, "Honest Amish", "Beard Oil");
         assertEquals("Beard Oil", new_product.getName(), "Name should be the same as when created");
     }
 
     @Test
     @DisplayName("This Method Tests that a Product Creates With The Correct Cost")
     public void testNewProductCost() {
-        Product new_product = new Product("Beard Oil", 12.99);
+        Product new_product = new Product(2, "Classic", 12.99, "Honest Amish", "Beard Oil");
         assertEquals(12.99, new_product.getPrice(), "Cost should be the same as when created");
     }
 
@@ -54,7 +54,7 @@ class TechBootcampPerficientApplicationTests {
     @Test
     @DisplayName("Testing Write To Log Error Handling")
     public void testError() {
-        Product new_product = new Product("Wax", -12.12);
+        Product new_product = new Product(2, "Classic", -12.12, "Honest Amish", "Oil");
         double price = new_product.getPrice();
         assertEquals(price, -12.12, "Price should be negative 12.12 so thatt Error message triggers.");
     }
