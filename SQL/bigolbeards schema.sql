@@ -1,4 +1,4 @@
-
+product
 USE BIGOLBEARDS;
 DROP TABLE IF EXISTS BRAND;
 CREATE TABLE BRAND (
@@ -30,6 +30,6 @@ Rating int not null,
 ReviewDate date not null,
 Review mediumtext,
 ProductID int not null,
-foreign key (ReviewID) references PRODUCT(ProductID)
+foreign key (ProductID) references PRODUCT(ProductID)
 );
 

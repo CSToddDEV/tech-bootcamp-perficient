@@ -53,4 +53,4 @@ VALUES ((SELECT BrandID FROM BRAND WHERE BrandName = "Clubman"), "Black", "Musta
 INSERT INTO PRODUCT (BrandID, ProductName, ProductType, Price)
 VALUES ((SELECT BrandID FROM BRAND WHERE BrandName = "Clubman"), "Chestnut", "Mustache Wax", 4.95);
 INSERT INTO PRODUCT (BrandID, ProductName, ProductType, Price)
-VALUES ((SELECT BrandID FROM BRAND WHERE BrandName = "Clubman"), "Brown", "Mustache Wax", 4.95);
+VALUES ((SELECT BrandID FROM BRAND WHERE BrandName = "Clubman"), "Brownreview", "Mustache Wax", 4.95);

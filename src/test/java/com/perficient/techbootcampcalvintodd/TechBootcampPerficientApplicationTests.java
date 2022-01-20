@@ -1,5 +1,6 @@
 package com.perficient.techbootcampcalvintodd;
 
+import com.perficient.techbootcampcalvintodd.entity.Product;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,14 +28,14 @@ class TechBootcampPerficientApplicationTests {
     @Test
     @DisplayName("This Method Tests that a Product Creates With The Correct Name")
     public void testNewProductName() {
-        Product new_product = new Product(2, "Classic", 12.99, "Honest Amish", "Beard Oil");
-        assertEquals("Beard Oil", new_product.getName(), "Name should be the same as when created");
+        Product new_product = new Product();
+        assertEquals("Beard Oil", new_product.getProduct_type(), "Name should be the same as when created");
     }
 
     @Test
     @DisplayName("This Method Tests that a Product Creates With The Correct Cost")
     public void testNewProductCost() {
-        Product new_product = new Product(2, "Classic", 12.99, "Honest Amish", "Beard Oil");
+        Product new_product = new Product();
         assertEquals(12.99, new_product.getPrice(), "Cost should be the same as when created");
     }
 
@@ -42,10 +43,10 @@ class TechBootcampPerficientApplicationTests {
     @DisplayName("Test Mocking with Mockito")
     public void testMocking() {
         assertNotNull(mockProduct);
-        when(mockProduct.getName()).thenReturn("WAX");
+        when(mockProduct.getProduct_type()).thenReturn("WAX");
         when(mockProduct.getPrice()).thenReturn(5.99);
 
-        assertEquals("WAX", mockProduct.getName(), "The Product Name should equal the mock " +
+        assertEquals("WAX", mockProduct.getProduct_type(), "The Product Name should equal the mock " +
                 "product name");
         assertEquals(5.99, mockProduct.getPrice(), "The product price should equal the mock product " +
                 "price");
@@ -54,8 +55,8 @@ class TechBootcampPerficientApplicationTests {
     @Test
     @DisplayName("Testing Write To Log Error Handling")
     public void testError() {
-        Product new_product = new Product(2, "Classic", -12.12, "Honest Amish", "Oil");
+        Product new_product = new Product();
         double price = new_product.getPrice();
-        assertEquals(price, -12.12, "Price should be negative 12.12 so thatt Error message triggers.");
+        assertEquals(price, -12.12, "Price should be negative 12.12 so that Error message triggers.");
     }
 }
