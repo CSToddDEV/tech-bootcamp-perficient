@@ -4,16 +4,19 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity(name = "product")
 public class Product {
 
     // Declarations
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private Long brand_id;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Brand brand;
 
     private String product_name;
 
@@ -27,7 +30,8 @@ public class Product {
 
     private Double rating;
 
-    private Long recent_review;
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "product")
+    private Set<Review> reviews;
 
     // Constructor
     public Product() {}
@@ -39,7 +43,7 @@ public class Product {
     public Long getId() { return id; }
     public void setId(Long ProductID ) { this.id = ProductID; }
 
-    public Long getBrand() { return brand_id; }
+    public Long getBrand() { return brand.getId(); }
     public void setBrand_id(Long BrandID ) { this.id = BrandID; }
 
     public String getProduct_name() { return product_name; }
@@ -56,8 +60,5 @@ public class Product {
 
     public Double getRating() { return rating; }
     public void setRating( Double Rating ) { this.price = Rating; }
-
-    public Long getRecent_review() { return recent_review; }
-    public void setRecent_review(Long RecentReview ) { this.recent_review = RecentReview; }
 
 }

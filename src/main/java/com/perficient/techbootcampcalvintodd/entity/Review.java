@@ -3,17 +3,14 @@ package com.perficient.techbootcampcalvintodd.entity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity(name="review")
 public class Review {
 
     // Declarations
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -24,8 +21,9 @@ public class Review {
 
     private String review;
 
-    @Column(nullable = false)
-    private Long product_id;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Product product;
 
     // Logger
     private static final Logger LOGGER = LoggerFactory.getLogger(Review.class);
@@ -46,7 +44,7 @@ public class Review {
     public String getReview() { return review; }
     public void setReview(String review ) { this.review = review; }
 
-    public Long getProductId() { return product_id; }
-    public void setProductId(Long product_id ) { this.product_id = product_id; }
+    public Product getProductId() { return product; }
+    public void setProductId(Product product_id ) { this.product = product_id; }
 
 }

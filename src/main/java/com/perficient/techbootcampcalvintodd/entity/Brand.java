@@ -3,17 +3,15 @@ package com.perficient.techbootcampcalvintodd.entity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity(name= "brand")
 public class Brand {
 
     // Declarations
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, unique = true)
@@ -26,6 +24,9 @@ public class Brand {
     private String phone;
 
     private Long top_seller;
+
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "brand")
+    private Set<Product> products;
 
     // Logger
     private static final Logger LOGGER = LoggerFactory.getLogger(Brand.class);
