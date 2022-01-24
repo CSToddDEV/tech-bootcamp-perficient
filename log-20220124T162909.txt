@@ -1,0 +1,7 @@
+16:29:14.841 ERROR c.p.t.aspect.LogExecutionTime - Brand com.perficient.techbootcampcalvintodd.controller.BrandController.getBrand(Long) executed in 49ms
+16:29:30.314 ERROR c.p.t.aspect.LogExecutionTime - Brand com.perficient.techbootcampcalvintodd.controller.BrandController.getBrand(Long) executed in 2ms
+16:30:24.330 ERROR c.p.t.aspect.LogExecutionTime - void com.perficient.techbootcampcalvintodd.controller.BrandController.updateBrand(Long,Brand) executed in 30ms
+16:30:31.731 ERROR c.p.t.aspect.LogExecutionTime - Product com.perficient.techbootcampcalvintodd.controller.ProductController.getProduct(Long) executed in 2ms
+16:30:55.240 ERROR c.p.t.aspect.LogExecutionTime - Brand com.perficient.techbootcampcalvintodd.controller.BrandController.getBrand(Long) executed in 3ms
+16:55:55.110 ERROR c.p.t.aspect.LogExecutionTime - Review com.perficient.techbootcampcalvintodd.controller.ReviewController.getReview(Long) executed in 4ms
+16:57:35.093 ERROR c.p.t.aspect.LogExecutionTime - Review com.perficient.techbootcampcalvintodd.controller.ReviewController.getReview(Long) executed in 3ms

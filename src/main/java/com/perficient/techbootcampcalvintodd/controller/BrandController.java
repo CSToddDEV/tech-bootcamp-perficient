@@ -1,9 +1,10 @@
 package com.perficient.techbootcampcalvintodd.controller;
 
 import com.perficient.techbootcampcalvintodd.aspect.LogExecutionTimeInt;
-import com.perficient.techbootcampcalvintodd.exceptions.BrandNotFound;
-import com.perficient.techbootcampcalvintodd.repository.BrandRepository;
 import com.perficient.techbootcampcalvintodd.entity.Brand;
+import com.perficient.techbootcampcalvintodd.exceptions.BrandNotFound;
+import com.perficient.techbootcampcalvintodd.service.BOBService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,48 +12,35 @@ import java.util.List;
 @RestController
 public class BrandController {
 
-    private final BrandRepository repository;
+    @Autowired
+    BOBService service;
 
-    BrandController(BrandRepository repository) {
-        this.repository = repository;
-    }
+    BrandController() { }
 
     @GetMapping("/brands")
     @LogExecutionTimeInt
     List<Brand> getAll() {
-        return repository.findAll();
+        return (List<Brand>) service.findAllBrands();
     }
 
     @GetMapping("/brands/{id}")
     @LogExecutionTimeInt
     Brand getBrand(@PathVariable Long id) {
-        return repository.findById(id)
+        return service.findBrand(id)
                 .orElseThrow(() -> new BrandNotFound(id));
     }
 
     @PostMapping("/brands")
     @LogExecutionTimeInt
-    Brand createBrand(@RequestBody Brand brand) { return repository.save(brand); }
+    void createBrand(@RequestBody Brand brand) { service.createBrand(brand); }
 
     @PutMapping("/brands/{id}")
     @LogExecutionTimeInt
-    Brand replaceBrand(@PathVariable Long id, @RequestBody Brand new_brand) {
-        return repository.findById(id)
-                .map(brand -> {
-                    brand.setBrand_name(new_brand.getBrand_name());
-                    brand.setBrand_site(new_brand.getBrand_site());
-                    brand.setPhone(new_brand.getPhone());
-                    return repository.save(brand);
-                })
-                .orElseGet(() -> {
-                    new_brand.setId(id);
-                    return repository.save(new_brand);
-                });
-    }
+    void updateBrand(@PathVariable Long id, @RequestBody Brand new_brand) { service.updateBrand(id, new_brand);}
 
-    @DeleteMapping("/brands/{id}")
-    @LogExecutionTimeInt
-    void deleteBrand(@PathVariable Long id) { repository.deleteById(id); }
+//    @DeleteMapping("/brands/{id}")
+//    @LogExecutionTimeInt
+//    void deleteBrand(@PathVariable Long id) { repository.deleteById(id); }
 
 }
 

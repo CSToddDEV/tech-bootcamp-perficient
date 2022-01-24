@@ -1,5 +1,6 @@
 package com.perficient.techbootcampcalvintodd.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,9 +22,13 @@ public class Review {
 
     private String review;
 
+    @JsonBackReference
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
+
+    @Transient
+    private Long product_id;
 
     // Logger
     private static final Logger LOGGER = LoggerFactory.getLogger(Review.class);
@@ -32,19 +37,22 @@ public class Review {
     public Review() { }
 
     // Getter/Setter Methods
-    public Long getId() { return id; }
+    public Long getId() { return this.id; }
     public void setId(Long id ) { this.id = id; }
 
-    public Long getRating() { return rating; }
+    public Long getRating() { return this.rating; }
     public void setRating(Long rating ) { this.rating = rating; }
 
-    public String getReviewDate() { return review_date; }
-    public void setReviewDate(String review_date ) { this.review_date = review_date; }
+    public String getReview_date() { return this.review_date; }
+    public void setReview_date(String review_date ) { this.review_date = review_date; }
 
-    public String getReview() { return review; }
+    public String getReview() { return this.review; }
     public void setReview(String review ) { this.review = review; }
 
-    public Product getProductId() { return product; }
-    public void setProductId(Product product_id ) { this.product = product_id; }
+    public Long getProduct_id() { return this.product_id; }
+    public void setProduct_id(Long product_id ) { this.product_id = product_id; }
+
+    public Product getProduct() { return this.product; }
+    public void setProduct( Product product ) { this.product = product; }
 
 }
