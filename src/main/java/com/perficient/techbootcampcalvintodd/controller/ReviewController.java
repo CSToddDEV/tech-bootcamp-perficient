@@ -41,8 +41,8 @@ public class ReviewController {
          service.updateReview(id, new_review);
     }
 
-//    @DeleteMapping("/reviews/{id}")
-//    @LogExecutionTimeInt
-//    void deleteReview(@PathVariable Long id) { service.deleteById(id); }
-//
+    @DeleteMapping("/reviews/{id}")
+    @LogExecutionTimeInt
+    void deleteReview(@PathVariable Long id) { service.deleteReview(id); }
+
 }

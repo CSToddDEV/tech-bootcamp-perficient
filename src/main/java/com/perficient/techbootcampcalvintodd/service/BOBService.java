@@ -8,11 +8,14 @@ import com.perficient.techbootcampcalvintodd.entity.Review;
 import com.perficient.techbootcampcalvintodd.repository.BrandRepository;
 import com.perficient.techbootcampcalvintodd.repository.ProductRepository;
 import com.perficient.techbootcampcalvintodd.repository.ReviewRepository;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.*;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,6 +31,9 @@ public class BOBService {
     @Autowired
     ReviewRepository reviewRepository;
 
+    @PersistenceContext
+    private EntityManager em;
+
     // Logger
     private static final Logger LOGGER = LoggerFactory.getLogger(LogExecutionTime.class);
 
@@ -36,10 +42,10 @@ public class BOBService {
         return productRepository.findAll();
     }
 
-    public void createProduct(Product product) {
+    public Product createProduct(Product product) {
         Optional<Brand> brand = findBrand(product.getBrand());
         brand.ifPresent(product::setBrand_id);
-        productRepository.save(product);
+        return productRepository.save(product);
     }
 
     public Optional<Product> findProduct (Long ProductID) {
@@ -58,6 +64,10 @@ public class BOBService {
                     old_product.setRating(new_product.getRating());
                     return productRepository.save(old_product);
                 });
+    }
+
+    public void deleteProduct ( Long ProductID ) {
+        productRepository.deleteById(ProductID);
     }
 
     // Brand Methods
@@ -81,6 +91,23 @@ public class BOBService {
                     brand.setPhone(new_brand.getPhone());
                     return brandRepository.save(brand);
                 });
+    }
+
+    public void deleteBrand( Long brandID ) {
+        brandRepository.deleteById(brandID);
+    }
+
+    public List<?> brandReviews(Long id ) {
+        Query query = em.createQuery("""
+            SELECT b.brand_name, p.product_name, p.product_type, r.rating, r.review
+            FROM brand b
+            INNER JOIN b.products p
+            INNER JOIN p.reviews r
+            WHERE b.id = :b
+            ORDER BY r.rating DESC""");
+        
+        query.setParameter("b", id);
+        return query.getResultList();
     }
 
     // Review Methods
@@ -108,5 +135,9 @@ public class BOBService {
                     product.ifPresent(review::setProduct);
                     return reviewRepository.save(review);
                 });
+    }
+
+    public void deleteReview( Long reviewID ) {
+        reviewRepository.deleteById(reviewID);
     }
 }

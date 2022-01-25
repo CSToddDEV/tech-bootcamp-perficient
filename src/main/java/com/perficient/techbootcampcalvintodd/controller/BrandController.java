@@ -38,9 +38,15 @@ public class BrandController {
     @LogExecutionTimeInt
     void updateBrand(@PathVariable Long id, @RequestBody Brand new_brand) { service.updateBrand(id, new_brand);}
 
-//    @DeleteMapping("/brands/{id}")
-//    @LogExecutionTimeInt
-//    void deleteBrand(@PathVariable Long id) { repository.deleteById(id); }
+    @DeleteMapping("/brands/{id}")
+    @LogExecutionTimeInt
+    void deleteBrand(@PathVariable Long id) { service.deleteBrand(id); }
+
+    @GetMapping("/brands/{id}/reviews")
+    @LogExecutionTimeInt
+    public List<?> getBrandReviews(@PathVariable Long id) {
+        return service.brandReviews(id);
+    }
 
 }
 

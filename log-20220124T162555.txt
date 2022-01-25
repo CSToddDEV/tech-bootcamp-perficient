@@ -1,2 +1,0 @@
-16:27:01.335 ERROR c.p.t.aspect.LogExecutionTime - Product com.perficient.techbootcampcalvintodd.controller.ProductController.getProduct(Long) executed in 48ms
-16:27:27.764 ERROR c.p.t.aspect.LogExecutionTime - void com.perficient.techbootcampcalvintodd.controller.BrandController.getBrand(Long) executed in 3ms

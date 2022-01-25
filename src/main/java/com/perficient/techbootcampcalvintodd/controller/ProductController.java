@@ -8,6 +8,8 @@ import com.perficient.techbootcampcalvintodd.service.BOBService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,21 +27,25 @@ public class ProductController {
 
     @GetMapping("/products")
     @LogExecutionTimeInt
-    List<Product> getAll() {
+    public List<Product> getAll() {
         return (List<Product>) service.findAllProducts();
     }
 
     @GetMapping("/products/{id}")
     @LogExecutionTimeInt
-    Product getProduct(@PathVariable Long id) {
+    public Product getProduct(@PathVariable Long id) {
         return service.findProduct(id)
                 .orElseThrow(() -> new ProductNotFound(id));
     }
 
     @PostMapping("/products")
     @LogExecutionTimeInt
-    void createProduct(@RequestBody Product product) {
-        service.createProduct(product);
+    public ResponseEntity<?> createProduct(@RequestBody Product product) {
+        if (service.createProduct(product).getClass() == Product.class) {
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PutMapping("/products/{id}")
@@ -47,8 +53,8 @@ public class ProductController {
     void replaceProduct(@PathVariable Long id, @RequestBody Product new_product) {
         service.changeProduct(id, new_product); }
 
-//    @DeleteMapping("/products/{id}")
-//    @LogExecutionTimeInt
-//    void deleteProduct(@PathVariable Long id) { repository.deleteById(id); }
-//
+    @DeleteMapping("/products/{id}")
+    @LogExecutionTimeInt
+    void deleteProduct(@PathVariable Long id) { service.deleteProduct(id); }
+
 }
