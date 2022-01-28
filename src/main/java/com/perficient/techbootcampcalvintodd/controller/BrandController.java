@@ -32,7 +32,10 @@ public class BrandController {
 
     @PostMapping("/brands")
     @LogExecutionTimeInt
-    void createBrand(@RequestBody Brand brand) { service.createBrand(brand); }
+    Long createBrand(@RequestBody Brand brand) {
+            Brand new_brand = service.createBrand(brand);
+            return new_brand.getId();
+    }
 
     @PutMapping("/brands/{id}")
     @LogExecutionTimeInt
@@ -46,6 +49,12 @@ public class BrandController {
     @LogExecutionTimeInt
     public List<?> getBrandReviews(@PathVariable Long id) {
         return service.brandReviews(id);
+    }
+
+    @GetMapping("/brands/{id}/products")
+    @LogExecutionTimeInt
+    public List<?> getBrandProducts(@PathVariable Long id) {
+        return service.brandProducts(id);
     }
 
 }

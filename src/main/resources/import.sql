@@ -1,6 +1,6 @@
 USE bigolbeards;
 INSERT INTO BRAND (brand_name, brand_site) VALUES ("Honest Amish", "www.honestamish.com");
-INSERT INTO BRAND (brand_name, brand_site, phone) VALUES ("Viking Revolution", "www.vikingrevolution.com", "(425)358-9236");
+INSERT INTO BRAND (brand_name, brand_site, phone) VALUES ("Viking Revolution", "www.vikingrevolution.com", "425-358-9236");
 INSERT INTO BRAND (brand_name, brand_site) VALUES ("Crown Shaving Co.", "www.crownshavingco.com");
 INSERT INTO BRAND (brand_name, brand_site) VALUES ("Clubman", "www.clubmanonline.com");
 INSERT INTO PRODUCT (brand_id, product_name, product_type, price) VALUES ((SELECT id FROM BRAND WHERE brand_name = "Honest Amish"), "PURE", "Beard Balm", 12.87);

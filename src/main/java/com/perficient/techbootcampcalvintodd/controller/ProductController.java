@@ -57,4 +57,8 @@ public class ProductController {
     @LogExecutionTimeInt
     void deleteProduct(@PathVariable Long id) { service.deleteProduct(id); }
 
+    @GetMapping("/products/{id}/reviews")
+    @LogExecutionTimeInt
+    List<?> productReviews(@PathVariable Long id) {return service.productReviews(id);}
+
 }

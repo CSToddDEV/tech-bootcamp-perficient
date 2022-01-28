@@ -1,1 +1,0 @@
-13:21:10.193 ERROR c.p.t.aspect.LogExecutionTime - List com.perficient.techbootcampcalvintodd.controller.BrandController.getBrandReviews(Long) executed in 107ms

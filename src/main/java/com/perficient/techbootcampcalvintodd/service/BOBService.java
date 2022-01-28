@@ -39,6 +39,10 @@ public class BOBService {
 
     // Product Methods
     public Iterable<Product> findAllProducts() {
+        Iterable<Product> p_list = productRepository.findAll();
+        for (Product p : p_list) {
+            p.setBrand(p.getBrand_id().getId());
+        }
         return productRepository.findAll();
     }
 
@@ -70,13 +74,26 @@ public class BOBService {
         productRepository.deleteById(ProductID);
     }
 
+    public List<?> productReviews(Long id ) {
+        Query query = em.createQuery("""
+            SELECT b.brand_name, p.product_name, p.product_type, p.price, r.review, r.review_date, r.rating, r.id
+            FROM brand b
+            INNER JOIN b.products p
+            INNER JOIN p.reviews r
+            WHERE p.id = :p
+            ORDER BY r.rating DESC""");
+
+        query.setParameter("p", id);
+        return query.getResultList();
+    }
+
     // Brand Methods
     public Iterable<Brand> findAllBrands() {
         return brandRepository.findAll();
     }
 
-    public void createBrand(Brand brand) {
-        brandRepository.save(brand);
+    public Brand createBrand(Brand brand) {
+        return brandRepository.save(brand);
     }
 
     public Optional<Brand> findBrand (Long BrandID) {
@@ -106,6 +123,18 @@ public class BOBService {
             WHERE b.id = :b
             ORDER BY r.rating DESC""");
         
+        query.setParameter("b", id);
+        return query.getResultList();
+    }
+
+    public List<?> brandProducts(Long id ) {
+        Query query = em.createQuery("""
+            SELECT b.brand_name, p.product_name, p.product_type, p.price, p.id
+            FROM brand b
+            INNER JOIN b.products p
+            WHERE b.id = :b
+            ORDER BY p.product_type DESC""");
+
         query.setParameter("b", id);
         return query.getResultList();
     }
@@ -140,4 +169,17 @@ public class BOBService {
     public void deleteReview( Long reviewID ) {
         reviewRepository.deleteById(reviewID);
     }
+
+    public List<?> getFullReview(Long id ) {
+        Query query = em.createQuery("""
+            SELECT b.brand_name, p.product_name, p.product_type, p.price, r.review, r.review_date, r.rating, r.id, p.id
+            FROM brand b
+            INNER JOIN b.products p
+            INNER JOIN p.reviews r
+            WHERE r.id = :r""");
+
+        query.setParameter("r", id);
+        return query.getResultList();
+    }
+
 }

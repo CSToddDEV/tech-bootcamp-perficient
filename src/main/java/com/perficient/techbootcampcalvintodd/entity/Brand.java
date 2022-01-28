@@ -1,6 +1,8 @@
 package com.perficient.techbootcampcalvintodd.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,6 +32,7 @@ public class Brand {
 
     @JsonManagedReference
     @OneToMany(mappedBy = "brand_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Product> products;
 
     // Logger

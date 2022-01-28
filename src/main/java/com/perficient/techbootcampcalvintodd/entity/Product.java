@@ -3,6 +3,8 @@ package com.perficient.techbootcampcalvintodd.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
@@ -40,6 +42,7 @@ public class Product {
 
     @JsonManagedReference
     @OneToMany(mappedBy = "product")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Review> reviews;
 
     // Constructor

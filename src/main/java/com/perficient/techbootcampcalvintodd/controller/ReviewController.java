@@ -45,4 +45,8 @@ public class ReviewController {
     @LogExecutionTimeInt
     void deleteReview(@PathVariable Long id) { service.deleteReview(id); }
 
+    @GetMapping("/reviews/{id}/full")
+    @LogExecutionTimeInt
+    List<?> getFullReview(@PathVariable Long id) { return service.getFullReview(id); }
+
 }
